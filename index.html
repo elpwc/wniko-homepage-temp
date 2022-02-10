@@ -1,0 +1,333 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>wniko's homepage(仮)</title>
+    <meta charset="utf-8" />
+    <!--link rel="icon" href="./favicon.ico" /-->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Wniko's personal website" />
+    <meta name="author" content="wniko" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            margin: 0;
+            width: 100%;
+            background-color: rgb(38, 64, 80);
+            color: white;
+        }
+
+        .constructioninfo {
+            font-size: 3em;
+            font-weight: bold;
+            text-align: center;
+            padding: 10% 0;
+        }
+
+        main {
+            height: 100%;
+            margin: 0 20%;
+            padding: 0.5em;
+        }
+
+        .projectContainer {
+            border-radius: 10px;
+            padding: 0.5em;
+            margin: 0.5em 0;
+            transition: all 0.3s;
+        }
+
+        .projectContainer:hover {
+            box-shadow: 0 0 5px 0 gray;
+        }
+
+        .projectContainer .titlebar {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .projectContainer .titlebar .link {
+            display: flex;
+            gap: 2em;
+        }
+
+        .projectContainer .titlebar .title {
+            display: flex;
+            gap: 0.5em;
+        }
+
+        .projectContainer .titlebar .title p {
+            font-weight: bold;
+        }
+
+        .projectContainer .titlebar .title div {
+            font-size: small;
+            padding: 3px;
+            background-color: white;
+            border-radius: 5px;
+        }
+
+        .projectContainer .titlebar .title div.developping {
+            background-color: rgb(199, 186, 11);
+            color: white;
+        }
+
+        .projectContainer .titlebar .title div.complete {
+            background-color: rgb(67, 139, 67);
+            color: white;
+        }
+
+        .projectContainer .titlebar .title div.disposed {
+            background-color: rgb(88, 88, 88);
+            color: white;
+        }
+
+        .projectContainer .titlebar .title div.plan {
+            background-color: rgb(65, 139, 168);
+            color: white;
+        }
+
+        .projectContainer .desc {
+            padding-top: 1em;
+            display: flex;
+            gap: 0.5em;
+            justify-content: space-between;
+        }
+
+        .projectContainer .desc p {
+            font-size: 0.8em;
+        }
+
+        nav {
+            display: flex;
+            gap: 5em;
+            justify-content: center;
+        }
+
+        nav a {
+            cursor: pointer;
+            color: white;
+        }
+    </style>
+    <script>
+        const projects = [
+            {
+                name: "WOTAGEIPEDIA - ヲタ芸百科",
+                url: "http://wotagei.elpwc.com",
+                github: "https://github.com/elpwc/wotageipedia",
+                status: "开发中",
+                desc: "创造一个将各个视频网站上零散分布的技连视频中的技系统地登记、归类在一起，能方便又快捷地按照 「技名・系・动作(?)・本家・...」 等各种信息查技的网站。",
+                image: "./images/wotageipedia.png",
+            },
+            {
+                name: "wniko homepage",
+                url: "",
+                github: "https://github.com/elpwc/wniko-homepage",
+                status: "开发中",
+                desc: "真正的支持留言，博客，项目展示等等功能的个人主页",
+                image: "",
+            }, {
+                name: "XP系统测试器",
+                url: "http://www.elpwc.com/test",
+                github: "https://github.com/elpwc/seiheki-test",
+                status: "开发中",
+                desc: "一个提供XP系统维护功能的在线工具(?)",
+                image: "https://github.com/elpwc/seiheki-test/raw/main/public/favicon.png",
+            }, {
+                name: "吃掉小涩图",
+                url: "http://www.elpwc.com/eatsetu",
+                github: "https://github.com/elpwc/EatSetu",
+                status: "已完成",
+                desc: "跟风作()",
+                image: "",
+            }, {
+                name: "⊌PC Leaver .web - 批量出校请假服务",
+                url: "http://www.elpwc.com/upcleaver/",
+                github: "https://github.com/elpwc/UPC-Leaver.web",
+                status: "已停止维护",
+                desc: "",
+                image: "",
+            }, {
+                name: "ANIME-SEIRI.web",
+                url: "http://www.elpwc.com/animeseiri",
+                github: "https://github.com/elpwc/ANIME-SEIRI.web",
+                status: "已废弃",
+                desc: "",
+                image: "",
+            }, {
+                name: "City Counter Game",
+                url: "",
+                github: "https://github.com/elpwc/CityCounterGame",
+                status: "计划中",
+                desc: "猜城市名的web游戏",
+                image: "",
+            }, {
+                name: "웹페이지 漢字 콘버터 Chrome ext",
+                url: "",
+                github: "",
+                status: "构想中",
+                desc: "将韩文页面内汉字词全部转换为汉字的chrome插件",
+                image: "",
+            }, {
+                name: "地名词源收录站",
+                url: "",
+                github: "",
+                status: "构想中",
+                desc: "",
+                image: "",
+            }, {
+                name: "CJKVR对照图在线排版",
+                url: "",
+                github: "",
+                status: "构想中",
+                desc: "",
+                image: "",
+            }, {
+                name: "汉文训读在线排版",
+                url: "",
+                github: "",
+                status: "构想中",
+                desc: "",
+                image: "",
+            },
+        ];
+    </script>
+    <!--baidu anal-->
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?bb07890600863ac0e22a7ecaa0c4f366";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+
+<body>
+    <header>
+        <p class="constructioninfo">🚧This site is under construction.</p>
+        <nav>
+            <p style="font-weight: bold;">🌸wniko's homepage(仮)</p>
+            <a onclick="onNavClick()"> ⇒Home </a>
+            <a onclick="onNavClick()"> Projects </a>
+            <a onclick="onNavClick()"> Blogs </a>
+            <a href="https://www.pixiv.net/users/18240502" target="_blank"> Illusts </a>
+            <a onclick="alert('email: elpwc@hotmail.com\r\ntwitter: @elpwc\r\nqq: 2575784532\r\ngithub: @elpwc\r\n喵!')">
+                Contact </a>
+        </nav>
+    </header>
+
+    <main>
+
+        <h3>My Projects</h3>
+
+        <hr />
+
+        <div class="projectlist">
+        </div>
+
+    </main>
+
+    <script>
+        "use strict";
+
+        const onNavClick = () => {
+            alert("under construction~");
+        };
+
+        // 获取状态div
+        const getStatusDiv = (status) => {
+            switch (status) {
+                case "开发中":
+                    return `
+        <div class="developping">开发中</div>
+        `;
+                case "已完成":
+                    return `
+        <div class="complete">已完成</div>
+        `;
+                case "已废弃":
+                    return `
+        <div class="disposed">已废弃</div>
+        `;
+                case "计划中":
+                    return `
+        <div class="plan">计划中</div>
+        `; case "已停止维护":
+                    return `
+        <div class="disposed">已停止维护</div>
+        `; case "构想中":
+                    return `
+        <div class="plan">构想中</div>disposed
+        `;
+                default:
+                    return "";
+            }
+        };
+
+        // 获取project卡片
+        const getProjectCard = (project) => {
+            return `
+    <section class="projectContainer">
+<div class="titlebar">
+    <div class="title">
+        <p>${project.name}</p>
+        ${getStatusDiv(project.status)}
+    </div>
+    <div class="link">
+        ${project.url && `
+            <a href="${project.url}" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
+                <path fill-rule="evenodd"
+                    d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" />
+            </svg>
+            Goto Page
+        </a>
+        `}
+        
+        ${project.github && `
+        <a href="${project.github}" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-github" viewBox="0 0 16 16">
+                <path
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+            </svg>
+            Github
+        </a>
+        `}
+    </div>
+</div>
+<div class="desc">
+    <p>
+        ${project.desc}
+    </p>
+    
+    ${project.image && `
+    <img src="${project.image}" width="30%" height="30%" />
+    `}
+</div>
+</section>
+<hr />
+    `;
+        };
+
+        const projectListDiv = document.querySelector(".projectlist");
+
+        // 写入卡片
+        projects.forEach((project) => {
+            projectListDiv.innerHTML += getProjectCard(project);
+        });
+
+    </script>
+</body>
+
+</html>
