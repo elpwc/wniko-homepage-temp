@@ -20,6 +20,7 @@
             width: 100%;
             background-color: rgb(38, 64, 80);
             color: white;
+            border-bottom: solid 5px #8396a1;
         }
 
         .constructioninfo {
@@ -27,12 +28,17 @@
             font-weight: bold;
             text-align: center;
             padding: 10% 0;
+            text-shadow: 0 0 10px black;
         }
 
         main {
             height: 100%;
-            margin: 0 20%;
+            margin: 0 15%;
             padding: 0.5em;
+        }
+
+        main.mobile {
+            margin: auto;
         }
 
         .projectContainer {
@@ -40,10 +46,14 @@
             padding: 0.5em;
             margin: 0.5em 0;
             transition: all 0.3s;
+            min-height: 200px;
+            height: fit-content;
         }
 
-        .projectContainer:hover {
-            box-shadow: 0 0 5px 0 gray;
+        @media (any-hover: hover) {
+            .projectContainer:hover {
+                box-shadow: 0 0 5px 0 gray;
+            }
         }
 
         .projectContainer .titlebar {
@@ -54,6 +64,13 @@
         .projectContainer .titlebar .link {
             display: flex;
             gap: 2em;
+            min-width: max-content
+        }
+
+        .projectContainer .titlebar .link a {
+            color: #000;
+            text-decoration: underline;
+            font-size: 0.8em;
         }
 
         .projectContainer .titlebar .title {
@@ -61,8 +78,20 @@
             gap: 0.5em;
         }
 
-        .projectContainer .titlebar .title p {
+        .projectContainer .titlebar .title a {
+            color: #000;
+            text-decoration: none;
             font-weight: bold;
+        }
+
+        .projectContainer .titlebar .title a.linkable {
+            cursor: pointer;
+        }
+
+        @media (any-hover: hover) {
+            .projectContainer .titlebar .title a.linkable:hover {
+                text-decoration: underline;
+            }
         }
 
         .projectContainer .titlebar .title div {
@@ -70,6 +99,8 @@
             padding: 3px;
             background-color: white;
             border-radius: 5px;
+            min-width: max-content;
+            height: fit-content;
         }
 
         .projectContainer .titlebar .title div.developping {
@@ -99,13 +130,22 @@
             justify-content: space-between;
         }
 
-        .projectContainer .desc p {
-            font-size: 0.8em;
+        .projectContainer .desc article .tags {
+            font-size: 0.9em;
+            color: gray;
+            text-decoration: underline;
         }
 
         nav {
             display: flex;
             gap: 5em;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav div {
+            display: flex;
+            gap: 3em;
             justify-content: center;
         }
 
@@ -113,16 +153,69 @@
             cursor: pointer;
             color: white;
         }
+
+        h3 span {
+            color: gray;
+        }
+
+        @media screen and (min-width: 1200px) {
+            nav {
+                gap: 15em;
+            }
+
+            nav div {
+                gap: 8em;
+            }
+
+        }
+
+        @media screen and (min-width: 960px) and (max-width: 1199px) {}
+
+        @media screen and (min-width: 768px) and (max-width: 959px) {}
+
+        @media screen and (min-width: 480px) and (max-width: 767px) {
+            main {
+                margin: 0;
+            }
+
+            nav {
+                gap: 2em;
+            }
+        }
+
+        @media screen and (max-width: 479px) {
+            main {
+                margin: auto;
+            }
+
+            nav {
+                gap: 2em;
+            }
+
+            nav div {
+                gap: 1.5em;
+            }
+
+            .constructioninfo {
+                font-size: 2em;
+                padding: 10% 0;
+            }
+
+        }
     </style>
     <script>
+        const isMobile = /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent);
+
         const projects = [
             {
                 name: "WOTAGEIPEDIA - ヲタ芸百科",
                 url: "http://wotagei.elpwc.com",
                 github: "https://github.com/elpwc/wotageipedia",
                 status: "开发中",
-                desc: "创造一个将各个视频网站上零散分布的技连视频中的技系统地登记、归类在一起，能方便又快捷地按照 「技名・系・动作(?)・本家・...」 等各种信息查技的网站。",
+                desc: `同<a href="https://github.com/Shirakawa-ori" target="_blank"> @shirakawa </a>共同开发中 <br /> 目的是创造一个将各个视频网站上零散分布的技连视频中的技系统地登记、归类在一起，能方便又快捷地按照 「技名・系・动作(?)・本家・...」 等各种信息查技的网站。解决wota艺圈内查技难，ori技容易埋没在视频站，界隈难以联络到的问题`,
                 image: "./images/wotageipedia.png",
+                imageWidth: "40%",
+                tags: "React, Python, TypeScript, AntDesign"
             },
             {
                 name: "wniko homepage",
@@ -131,6 +224,7 @@
                 status: "开发中",
                 desc: "真正的支持留言，博客，项目展示等等功能的个人主页",
                 image: "",
+                tags: "React, Nest.js, TypeORM, TypeScript, AntDesign"
             }, {
                 name: "XP系统测试器",
                 url: "http://www.elpwc.com/test",
@@ -138,6 +232,8 @@
                 status: "开发中",
                 desc: "一个提供XP系统维护功能的在线工具(?)",
                 image: "./images/xp.png",
+                imageWidth: "8%",
+                tags: "Svelte, TypeScript, PHP"
             }, {
                 name: "吃掉小涩图",
                 url: "http://www.elpwc.com/eatsetu",
@@ -145,6 +241,7 @@
                 status: "已完成",
                 desc: "跟风作()",
                 image: "",
+                tags: "PHP, JS"
             }, {
                 name: "⊌PC Leaver .web - 批量出校请假服务",
                 url: "http://www.elpwc.com/upcleaver/",
@@ -152,6 +249,7 @@
                 status: "已停止维护",
                 desc: "",
                 image: "",
+                tags: "PHP, JS, BootStrap"
             }, {
                 name: "ANIME-SEIRI.web",
                 url: "http://www.elpwc.com/animeseiri",
@@ -159,6 +257,7 @@
                 status: "已废弃",
                 desc: "",
                 image: "",
+                tags: "PHP, SASS, BootStrap"
             }, {
                 name: "City Counter Game",
                 url: "",
@@ -211,31 +310,87 @@
 
 <body>
     <header>
-        <p class="constructioninfo">🚧This site is under construction.</p>
+        <p class="constructioninfo">🚧 This site is under construction.</p>
         <nav>
-            <p style="font-weight: bold;">🌸wniko's homepage(仮)</p>
-            <a onclick="onNavClick()"> ⇒Home </a>
-            <a onclick="onNavClick()"> Projects </a>
-            <a onclick="onNavClick()"> Blogs </a>
-            <a href="https://www.pixiv.net/users/18240502" target="_blank"> Illusts </a>
-            <a onclick="alert('email: elpwc@hotmail.com\r\ntwitter: @elpwc\r\nqq: 2575784532\r\ngithub: @elpwc\r\n喵!')">
-                Contact </a>
+            <p style="font-weight: bold;">🌸wniko's homepage(仮) 2022</p>
+            <div>
+                <a onclick="onNavClick()"> ⇒Home </a>
+                <a onclick="onNavClick()"> Projects </a>
+                <a onclick="onNavClick()"> Blogs </a>
+                <a href="https://www.pixiv.net/users/18240502" target="_blank"> Illusts </a>
+                <a
+                    onclick="alert('email: elpwc@hotmail.com\r\ntwitter: @elpwc\r\nqq: 2575784532\r\ngithub: @elpwc\r\n喵!')">
+                    Contact </a>
+            </div>
         </nav>
     </header>
 
     <main>
 
-        <h3>My Projects</h3>
+        <h3>My Projects <span></span></h3>
 
         <hr />
 
         <div class="projectlist">
+            <!--section class="projectContainer">
+                <div class="titlebar">
+                    <div class="title">
+
+                        <div class="plan">构想中</div>
+                        <a class="linkable" href="#" target="_blank">${project.name}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
+                                <path fill-rule="evenodd"
+                                    d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" />
+                            </svg>
+
+                        </a>
+
+                    </div>
+                    <div class="link">
+
+                        <a href="${project.github}" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-github" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+                            </svg>
+                            GitHub
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
+                                <path fill-rule="evenodd"
+                                    d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="desc">
+                    <article>
+                        <p class="tags">
+                            asd, asd, asd
+                        </p>
+                        <p class="desctext">
+                            ${project.desc}
+                        </p>
+                    </article>
+
+                    <img src="${project.image}" />
+
+                </div>
+            </section>
+            <hr /-->
         </div>
 
     </main>
 
     <script>
         "use strict";
+
+        document.querySelector('h3 span').innerHTML = `(${projects.length})`
 
         const onNavClick = () => {
             alert("under construction~");
@@ -264,7 +419,7 @@
         <div class="disposed">已停止维护</div>
         `; case "构想中":
                     return `
-        <div class="plan">构想中</div>disposed
+        <div class="plan">构想中</div>
         `;
                 default:
                     return "";
@@ -277,12 +432,10 @@
     <section class="projectContainer">
 <div class="titlebar">
     <div class="title">
-        <p>${project.name}</p>
+    
         ${getStatusDiv(project.status)}
-    </div>
-    <div class="link">
-        ${project.url && `
-            <a href="${project.url}" target="_blank">
+        
+        <a ${project.url && `class="linkable" href="${project.url}" target="_blank"`}>${project.name}${project.url && `
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                 class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
                 <path fill-rule="evenodd"
@@ -290,10 +443,9 @@
                 <path fill-rule="evenodd"
                     d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" />
             </svg>
-            Goto Page
-        </a>
-        `}
-        
+        `}</a>
+    </div>
+    <div class="link">
         ${project.github && `
         <a href="${project.github}" target="_blank">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -301,18 +453,33 @@
                 <path
                     d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
             </svg>
-            Github
+            GitHub
+            <span>
+                <sup>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor"
+                                        class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
+                    <path fill-rule="evenodd"
+                        d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" />
+                    </svg>
+                </sup>
+            </span>
         </a>
         `}
     </div>
 </div>
 <div class="desc">
-    <p>
-        ${project.desc}
-    </p>
-    
+                    <article>
+                        <p class="tags">
+                            ${project.tags || ''}
+                        </p>
+                        <p class="desctext">
+                            ${project.desc}
+                        </p>
+                    </article>
     ${project.image && `
-    <img src="${project.image}" width="30%" height="30%" />
+    <img src="${project.image}" width="${project.imageWidth || '25%'}" />
     `}
 </div>
 </section>
